@@ -1,16 +1,8 @@
-
-
 // creating frame
 // declare constant
 const FRAME_HEIGHT = 500
 const FRAME_WIDTH = 500
 const MARGINS = {left:50, right:50, top:50, bottom:50};
-const xInput = document.getElementById("cx1");
-const yInput = document.getElementById("cy1");
-const cx1 = xInput.value;
-const cy1 = yInput.value;
-const x = cx1 * 50;
-const y = 500 - (cy1 * 50);
 
 
 // Create height and width variables
@@ -66,8 +58,6 @@ d3.csv("data/scatter-data.csv").then((data) => {
      .style("fill", "blue");
     };
 
-
-
   // Add event listeners
     FRAME1.selectAll(".point")
            .on("mouseover", hoverColor) 
@@ -93,8 +83,9 @@ d3.csv("data/scatter-data.csv").then((data) => {
     d3.select(this).attr("stroke", "black")
                    .attr("stroke-width", "4");
   }
-});    
 
+
+});
 
 
      // add x axis
@@ -114,17 +105,55 @@ d3.csv("data/scatter-data.csv").then((data) => {
           .attr("font-size", '20px'); 
 
 
+  // function to add point
+  function addPoint(){
+    const x = d3.select("#cx1").property("value");
+    const y = d3.select("#cy1").property("value");
+
+
+    FRAME1.append("circle")
+            .attr("cx", (X_SCALE(x) + MARGINS.left)) 
+            .attr("cy", (Y_SCALE(y) + MARGINS.bottom))
+            .attr("r", 10)
+            .attr("class", "point")
+              .on("mouseover", hoverColor) 
+              .on("click", function() {
+  // Check if the point already has a border
+  var hasBorder = d3.select(this).attr("stroke") === "black";
+  let cx = (this.getAttribute("cx") - MARGINS.left) / 40;
+  let cy = ((500 - this.getAttribute("cy")) - MARGINS.bottom) / 40;
+
+  // create new text
+  let text1 = "Last point clicked: "
+  let text2 = "(" + cx +"," + cy + ")"
+  
+  // show the text information
+  document.getElementById("text1").innerHTML = text1;
+  document.getElementById("text2").innerHTML = text2;
+  
+  // If the point has a border, remove it. Otherwise, add a border.
+  if (hasBorder) {
+    d3.select(this).attr("stroke", null);
+  } else {
+    d3.select(this).attr("stroke", "black")
+                   .attr("stroke-width", "4");
+  }
+
+
+})
+              .on("mouseleave", revertColor) 
+
+
+};
+
+
+  //event listener for submit button
+  d3.select("#subButton")
+  .on("click", addPoint); 
+
+
+
     });
-
-    function addDot(){
-      FRAME1.append("circle")
-      .attr("cx", x)
-      .attr("cy", y)
-      .attr("r", 3);
-    };
-
-
-
 
 
 
@@ -227,4 +256,6 @@ d3.csv("data/bar-data.csv").then((data) => {
           .on("mouseover", handleMouseover) 
           .on("mousemove", handleMousemove)
           .on("mouseleave", handleMouseleave);    
+
+
 });
