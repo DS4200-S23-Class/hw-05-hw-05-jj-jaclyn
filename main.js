@@ -96,13 +96,6 @@ d3.csv("data/scatter-data.csv").then((data) => {
   }
 
 
-
-
-
-
-
-
-
 });    
 
 
