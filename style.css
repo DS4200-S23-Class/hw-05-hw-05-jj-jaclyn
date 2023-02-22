@@ -21,6 +21,23 @@ h2{
   width: 40%;
 }
 
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
 circle {
+   fill: blue;
+}
+
+.tooltip {
+  position: absolute;
+  background-color:grey;
+  border:solid;
+  padding: 5px;
+}
+
+.bar {
    fill: blue;
 }

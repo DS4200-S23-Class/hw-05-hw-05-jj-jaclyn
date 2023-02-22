@@ -75,7 +75,10 @@ d3.csv("data/scatter-data.csv").then((data) => {
     d3.select(this).attr("stroke", "black")
                    .attr("stroke-width", "4");
   }
+
 });    
+
+
 
      // add x axis
    FRAME1.append("g") 
@@ -95,3 +98,111 @@ d3.csv("data/scatter-data.csv").then((data) => {
 
 
     });
+
+
+
+
+
+
+
+//bar plot
+const FRAME2= d3.select("#vis2") 
+                  .append("svg") 
+                    .attr("height", FRAME_HEIGHT)   
+                    .attr("width", FRAME_WIDTH)
+                    .attr("class", "frame"); 
+
+
+
+// Reading from a file
+d3.csv("data/bar-data.csv").then((data) => { 
+
+    const MAX = d3.max(data, (d) => { return parseInt(d.amount); });
+
+    const X_SCALE = d3.scaleBand() 
+                    .domain(data.map((d) => { return d.category; })) 
+                    .range([0, VIS_WIDTH])
+                    .padding(.2); 
+           
+    const Y_SCALE = d3.scaleLinear() 
+                      .domain([MAX + 10, 0]) 
+                      .range([0, VIS_HEIGHT]); 
+
+
+
+    FRAME2.selectAll("bar")  
+          .data(data) 
+          .enter()       
+          .append("rect")  
+            .attr("y", (d) => { return Y_SCALE(d.amount) + MARGINS.bottom; }) 
+            .attr("x", (d) => { return X_SCALE(d.category) + MARGINS.left;}) 
+            .attr("height", (d) => { return VIS_HEIGHT - Y_SCALE(d.amount); })
+            .attr("width", X_SCALE.bandwidth())
+            .attr("class", "bar");
+
+
+
+   // add x axis 
+   FRAME2.append("g") 
+     //move the axis down to the page
+        .attr("transform", "translate(" + MARGINS.left + 
+              "," + (VIS_HEIGHT + MARGINS.top) + ")") 
+        .call(d3.axisBottom(X_SCALE))
+          .attr("font-size", '20px'); 
+
+
+  // add y axis
+  FRAME2.append("g") 
+    //move the axis down to the page
+        .attr("transform", "translate(" + (MARGINS.left) + 
+              "," + (MARGINS.top) + ")") 
+        .call(d3.axisLeft(Y_SCALE).ticks(10)) 
+          .attr("font-size", '20px'); 
+
+
+  const TOOLTIP = d3.select("#vis2")
+                        .append("div")
+                          .attr("class", "tooltip")
+                          .style("opacity", 0); 
+
+
+    //mouseover
+    function handleMouseover(event, d) {
+
+    //tooltip not longer transparent when mouseover
+      TOOLTIP.style("opacity", 1);
+
+      // change bar color
+      d3.select(this)
+        .style("fill", "orange");
+
+    };
+
+    function handleMousemove(event, d) {
+
+      // position the tooltip and fill in information 
+      TOOLTIP.html("Category: " + d.category + "<br>Amount: " + d.amount)
+              .style("left", (event.pageX + 10) + "px") 
+              .style("top", (event.pageY - 50) + "px"); 
+     
+    };
+
+    function handleMouseleave(event, d) {
+
+      // on mouseleave, make transparant again 
+      TOOLTIP.style("opacity", 0); 
+
+      //revert to original bar color
+      d3.select(this)
+        .style("fill", "blue");
+    };
+
+    // add event listners to the point
+    // only call when event occur
+    FRAME2.selectAll(".bar")
+          .on("mouseover", handleMouseover) 
+          .on("mousemove", handleMousemove)
+          .on("mouseleave", handleMouseleave);    
+
+
+});
