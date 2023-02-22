@@ -92,10 +92,7 @@ d3.csv("data/scatter-data.csv").then((data) => {
   } else {
     d3.select(this).attr("stroke", "black")
                    .attr("stroke-width", "4");
-
   }
-
-
 });    
 
 
