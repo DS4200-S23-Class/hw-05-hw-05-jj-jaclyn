@@ -75,6 +75,16 @@ d3.csv("data/scatter-data.csv").then((data) => {
           .on("click", function() {
   // Check if the point already has a border
   var hasBorder = d3.select(this).attr("stroke") === "black";
+  let cx = this.getAttribute("cx") / 50;
+  let cy = (500 - this.getAttribute("cy")) / 50;
+
+  // create new text
+  let text1 = "Last point clicked: "
+  let text2 = "(" + cx +"," + cy + ")"
+  
+  // show the text information
+  document.getElementById("text1").innerHTML = text1;
+  document.getElementById("text2").innerHTML = text2;
   
   // If the point has a border, remove it. Otherwise, add a border.
   if (hasBorder) {
@@ -82,16 +92,7 @@ d3.csv("data/scatter-data.csv").then((data) => {
   } else {
     d3.select(this).attr("stroke", "black")
                    .attr("stroke-width", "4");
-    let cx = this.getAttribute("cx") / 50;
-    let cy = (500 - this.getAttribute("cy")) / 50;
 
-    // create new text
-    let text1 = "Last point clicked: "
-    let text2 = "(" + cx +"," + cy + ")"
-  
-    // show the text information
-    document.getElementById("text1").innerHTML = text1;
-    document.getElementById("text2").innerHTML = text2;
   }
 
 
