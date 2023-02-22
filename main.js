@@ -64,13 +64,6 @@ d3.csv("data/scatter-data.csv").then((data) => {
      .style("fill", "blue");
     };
 
-//    function addDot(){
-//      FRAME1.append("circle")
-//      .attr("cx", x)
-//      .attr("cy", y)
-//      .attr("r", 3);
-//    };
-
 
 
   // Add event listeners
@@ -113,6 +106,13 @@ d3.csv("data/scatter-data.csv").then((data) => {
 
 
     });
+
+    function addDot(){
+      FRAME1.append("circle")
+      .attr("cx", x)
+      .attr("cy", y)
+      .attr("r", 3);
+    };
 
 
 
