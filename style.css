@@ -1,11 +1,16 @@
-
-body{
-  font-family: Arial;
+body {
+ font-family: Arial;
 }
 
 h1{
   text-align: center;
 }
+
+h2{
+  text-align: center;
+    clear: both;
+}
+
 .column1 {
   float: left;
   width: 60%;
@@ -14,4 +19,8 @@ h1{
 .column2 {
   float: right;
   width: 40%;
+}
+
+circle {
+   fill: blue;
 }
