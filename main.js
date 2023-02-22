@@ -59,6 +59,21 @@ d3.csv("data/scatter-data.csv").then((data) => {
     };
 
 
+  // Add event listeners
+    FRAME1.selectAll(".point")
+           .on("mouseover", hoverColor) 
+          .on("mouseleave", revertColor)
+          .on("click", function() {
+  // Check if the point already has a border
+  var hasBorder = d3.select(this).attr("stroke") === "black";
+  
+  // If the point has a border, remove it. Otherwise, add a border.
+  if (hasBorder) {
+    d3.select(this).attr("stroke", null);
+  } else {
+    d3.select(this).attr("stroke", "black")
+                   .attr("stroke-width", "4");
+  }
 
     const xInput = document.getElementById("cx1");
     const yInput = document.getElementById("cy1");
@@ -75,23 +90,6 @@ d3.csv("data/scatter-data.csv").then((data) => {
         .attr("cy", y)
         .attr("r", 3);
     };
-  
-
-  // Add event listeners
-    FRAME1.selectAll(".point")
-           .on("mouseover", hoverColor) 
-          .on("mouseleave", revertColor)
-          .on("click", function() {
-  // Check if the point already has a border
-  var hasBorder = d3.select(this).attr("stroke") === "black";
-  
-  // If the point has a border, remove it. Otherwise, add a border.
-  if (hasBorder) {
-    d3.select(this).attr("stroke", null);
-  } else {
-    d3.select(this).attr("stroke", "black")
-                   .attr("stroke-width", "4");
-  }
 
 });    
 
