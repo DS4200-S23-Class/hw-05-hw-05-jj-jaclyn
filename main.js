@@ -75,12 +75,12 @@ d3.csv("data/scatter-data.csv").then((data) => {
           .on("click", function() {
   // Check if the point already has a border
   var hasBorder = d3.select(this).attr("stroke") === "black";
-  let cx = this.getAttribute("cx") - MARGINS.left;
-  let cy = (500 - this.getAttribute("cy")) - MARGINS.bottom;
+  let cx = (this.getAttribute("cx") - MARGINS.left) / 40;
+  let cy = ((500 - this.getAttribute("cy")) - MARGINS.bottom) / 40;
 
   // create new text
   let text1 = "Last point clicked: "
-  let text2 = "(" + cx +"," + cy + ")!"
+  let text2 = "(" + cx +"," + cy + ")!!"
   
   // show the text information
   document.getElementById("text1").innerHTML = text1;
