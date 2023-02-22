@@ -80,7 +80,7 @@ d3.csv("data/scatter-data.csv").then((data) => {
 
   // create new text
   let text1 = "Last point clicked: "
-  let text2 = "(" + cx +"," + cy + ")"
+  let text2 = "(" + cx +"," + cy + ")!"
   
   // show the text information
   document.getElementById("text1").innerHTML = text1;
