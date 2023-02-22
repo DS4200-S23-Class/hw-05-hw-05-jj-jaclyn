@@ -75,20 +75,20 @@ d3.csv("data/scatter-data.csv").then((data) => {
                    .attr("stroke-width", "4");
   }
 
-    const xInput = document.getElementById("cx1");
-    const yInput = document.getElementById("cy1");
-    const cx1 = xInput.value;
-    const cy1 = yInput.value;
-    const x = cx1 * 50;
-    const y = 500 - (cy1 * 50);
+  const xInput = document.getElementById("cx1");
+  const yInput = document.getElementById("cy1");
+  const cx1 = xInput.value;
+  const cy1 = yInput.value;
+  const x = cx1 * 50;
+  const y = 500 - (cy1 * 50);
 
 
-    function addDot(){
-      FRAME1.
-      .append("circle")
-        .attr("cx", x)
-        .attr("cy", y)
-        .attr("r", 3);
+  function addDot(){
+    FRAME1.
+    .append("circle")
+     .attr("cx", x)
+     .attr("cy", y)
+     .attr("r", 3);
     };
 
 });    
