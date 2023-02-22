@@ -230,6 +230,4 @@ d3.csv("data/bar-data.csv").then((data) => {
           .on("mouseover", handleMouseover) 
           .on("mousemove", handleMousemove)
           .on("mouseleave", handleMouseleave);    
-
-
 });
